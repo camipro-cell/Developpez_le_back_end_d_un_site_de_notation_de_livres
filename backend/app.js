@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
+const path = require('path');
+
 
 const booksRoutes = require('./routes/books');
 const userRoutes = require('./routes/users');
+
+const app = express();
 
 mongoose.connect('mongodb+srv://cami-pro:9mwVnMfKD3CbX4ZN@cluster0.s5l9xg2.mongodb.net/?retryWrites=true&w=majority',
 { useNewUrlParser: true,
@@ -19,8 +22,11 @@ app.use((req, res, next) => {
   });
   app.use(express.json());
 
+  
 app.use('/api/books', booksRoutes);
 app.use('/api/auth', userRoutes);  
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 module.exports = app;
