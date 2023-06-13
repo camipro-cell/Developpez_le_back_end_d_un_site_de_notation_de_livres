@@ -8,7 +8,7 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://cami-pro:9mwVnMfKD3CbX4ZN@cluster0.s5l9xg2.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://cam:<>@cluster0.s5l9xg2.mongodb.net/?retryWrites=true&w=majority',
 { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
