@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
-      email: { type: String, required: true, unique: true },
-      password: { type: String, required: true }
-  });
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
 
 // The email addresses in the database are unique
 // This appropriate Mongoose plugin is used to ensure uniqueness and report errors.
