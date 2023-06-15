@@ -10,7 +10,7 @@ exports.createBook = (req, res, next) => {
   const book = new Book({
       ...bookObject,
       userId: req.auth.userId,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.compressedFilename}`,
       averageRating: bookObject.ratings[0].grade
   });
   book.save()
@@ -22,7 +22,7 @@ exports.createBook = (req, res, next) => {
 exports.modifyBook = (req, res, next) => {
   const bookObject = req.file ? {
     ...JSON.parse(req.body.book),
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.compressedFilename}`,
   } : { ...req.body };
   delete bookObject._userId;
   Book.findOne({ _id: req.params.id })
@@ -137,10 +137,4 @@ exports.postRating = (req, res, next) => {
       res.status(500).json({ error });
     });
 };
-
-
-
-
-
-
 
