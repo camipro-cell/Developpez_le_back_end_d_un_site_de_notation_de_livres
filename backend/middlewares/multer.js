@@ -13,11 +13,18 @@ const storage = multer.diskStorage({
         callback(null, 'images')
     },
     filename: (req, file, callback) => {
-        const name = file.originalname.split(' ').join('_');
-        const extension = MIME_TYPES[file.mimetype];
-        const { name: onlyFileName } = path.parse(name);
-        callback(null, onlyFileName + Date.now() + '.' + extension);
-    }
+		// Checking file type
+		if(file.mimetype.split('/')[0] !== 'image') new Error("Uploaded file must be an image");
+		// Checking image type
+		if(MIME_TYPES[file.mimetype] === undefined) new Error("Uploaded file must be a : JPG / PNG / WEBP");
+		// Creating a unique destination filename (original-date.extension)
+		const name = file.originalname.split(' ').join('_');
+		const extension = MIME_TYPES[file.mimetype];
+		const { name: onlyFileName } = path.parse(name);
+		const finalFilename = onlyFileName + '-' + Date.now() + '.' + extension;
+		// Sending to the next middleware / controller with the destination filename
+		callback(null, finalFilename);
+	}
 });
 
 module.exports = multer({ storage }).single('image');

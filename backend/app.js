@@ -4,14 +4,14 @@ const path = require('path');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 
-//require('dotenv').config();
+require('dotenv').config();
 
 const booksRoutes = require('./routes/books');
 const userRoutes = require('./routes/users');
 
 const app = express();
-//console.log();
-mongoose.connect('mongodb+srv://cam<>@cluster0.s5l9xg2.mongodb.net/?retryWrites=true&w=majority',
+console.log(process.env);
+mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@' + process.env.DB_CLUSTER + '.mongodb.net/?retryWrites=true&w=majority',
 { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
