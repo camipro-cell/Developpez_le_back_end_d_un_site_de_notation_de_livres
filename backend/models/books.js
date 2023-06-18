@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-// Model creation (mongoose scheme) book
+// Defining a model scheme for books in the application in using Mongoose
 const bookSchema = mongoose.Schema({
     userId: { type: String, required: true },
     title: { type: String, required: true, unique: true},

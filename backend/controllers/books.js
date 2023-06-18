@@ -95,6 +95,7 @@ exports.postRating = (req, res, next) => {
   const { userId, rating } = req.body;
 
   const user = req.body.userId;
+  
   if (user !== req.auth.userId) {
     return res.status(401).json({ message: 'Non autorisé' });
   }
@@ -112,6 +113,7 @@ exports.postRating = (req, res, next) => {
       
       // Verify if the user has already rated the book
       const userRating = book.ratings.find(rating => rating.userId === userId);
+      
       if (userRating) {
         return res.status(400).json({ error: "L'utilisateur a déjà noté ce livre." });
       }

@@ -1,3 +1,4 @@
+// Managing the download of image files in application
 const multer = require('multer');
 const path = require('path');
 

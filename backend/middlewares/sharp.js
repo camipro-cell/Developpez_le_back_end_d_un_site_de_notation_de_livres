@@ -1,6 +1,7 @@
 const sharp = require('sharp');
 const fs = require('fs');
 
+// Middleware to compress the downloaded image in webp format, and to resize it
 module.exports = async (req, res, next) => {
 	// Check if an image file has been uploaded
 	if (!req.file) {
