@@ -22,7 +22,6 @@ module.exports = async (req, res, next) => {
 				if(error) console.log(error);
 			});
 			next();
-			console.log('success');
 		} 	catch(error) {
 				res.status(403).json({ error });
 			}

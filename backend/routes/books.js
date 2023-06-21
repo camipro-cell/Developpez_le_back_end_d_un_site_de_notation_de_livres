@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+// Import middleware that will be used in books routes
 const auth = require('../middlewares/auth');
 const multer = require('../middlewares/multer');
 const sharp = require('../middlewares/sharp');
 
+// Import the controller books
 const booksCtrl = require('../controllers/books');
 
 // Definition of routes associated with books in the application
