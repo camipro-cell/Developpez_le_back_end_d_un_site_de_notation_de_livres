@@ -35,18 +35,9 @@ app.use(express.json());
 // Middleware used to clean data from the MongoDB database, in order to prevent malicious data injection attacks
 app.use(mongoSanitize());
 // Middleware used to secure the application by adding different HTTP headers
-app.use(
-  helmet({
-    hsts: {
-      maxAge: 31536000, 
-      includeSubDomains: true,
-      preload: true,
-    },
-    xssFilter: true,
-    crossOriginResourcePolicy: false,
-    noSniff: true,
-  })
-);
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+}));
 
 // All routes defined in booksRoutes will be accessible under the URL /api/books/
 app.use('/api/books', booksRoutes);

@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+/// Load environment variables from a .env file
+require('dotenv').config();
+
 const User = require('../models/users');
 
 // Function to register a new user

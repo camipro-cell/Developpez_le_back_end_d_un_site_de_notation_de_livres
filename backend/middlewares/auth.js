@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+/// Load environment variables from a .env file
+require('dotenv').config(); 
+
 // Middleware that checks and validates the JWT
 module.exports = (req, res, next) => {
     try {
