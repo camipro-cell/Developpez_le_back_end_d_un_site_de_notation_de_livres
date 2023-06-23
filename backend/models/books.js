@@ -18,6 +18,8 @@ const bookSchema = mongoose.Schema({
     averageRating: { type: Number, required: true }
 });
 
+// The title of a book in the database are unique
+// This appropriate Mongoose plugin is used to ensure uniqueness and report errors
 bookSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Book', bookSchema);

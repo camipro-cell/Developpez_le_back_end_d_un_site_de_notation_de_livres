@@ -31,13 +31,12 @@ exports.modifyBook = (req, res, next) => {
         res.status(403).json({ message: '403: unauthorized request' });
       } else {
           if (req.file) {
-            // Supprimer l'ancienne image du dossier images
-            const imagePath = path.join(__dirname, '..', 'images', path.basename(book.imageUrl));
-            fs.unlink(imagePath, (error) => {
-              if (error) {
-                console.log(error);
-              }
-            });
+              const imagePath = path.join(__dirname, '..', 'images', path.basename(book.imageUrl));
+              fs.unlink(imagePath, (error) => {
+                if (error) {
+                  console.log(error);
+                }
+              });
           }
           Book.updateOne({ _id: req.params.id }, { ...bookObject, _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Livre modifié!' }))
@@ -117,6 +116,7 @@ exports.postRating = (req, res, next) => {
       if (userRating) {
         return res.status(400).json({ error: "L'utilisateur a déjà noté ce livre." });
       }
+      
       // Add the note to the rating list
       book.ratings.push({ userId, grade: rating });
 

@@ -1,6 +1,6 @@
 const emailValidator = require('email-validator');
 
-// This middleware uses the email-validator module to validate if an email address is valid
+// This middleware uses the email-validator package to validate if an email address is valid
 const validateEmail = (req, res, next) => {
     const { email } = req.body;
 

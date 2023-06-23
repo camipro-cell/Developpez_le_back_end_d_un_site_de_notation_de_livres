@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
 });
 
 // The email addresses in the database are unique
-// This appropriate Mongoose plugin is used to ensure uniqueness and report errors.
+// This appropriate Mongoose plugin is used to ensure uniqueness and report errors
 userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('User', userSchema);

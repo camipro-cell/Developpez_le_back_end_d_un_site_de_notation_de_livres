@@ -1,4 +1,3 @@
-// Importing the modules needed for the application
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -12,7 +11,7 @@ require('dotenv').config();
 const booksRoutes = require('./routes/books');
 const userRoutes = require('./routes/users');
 
-// Creating an Express Application Instance
+// Creating the express application
 const app = express();
 
 // Connection to the MongoDB database
@@ -22,8 +21,7 @@ mongoose.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_P
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-// Middleware configuration:
-// Middleware that allows CORS (Cross-Origin Resource Sharing) management in the Express application
+// CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -32,9 +30,9 @@ app.use((req, res, next) => {
 });
 // Middleware used to analyze the body of incoming requests in JSON format
 app.use(express.json());
-// Middleware used to clean data from the MongoDB database, in order to prevent malicious data injection attacks
+
+// Securing the application
 app.use(mongoSanitize());
-// Middleware used to secure the application by adding different HTTP headers
 app.use(helmet({
   crossOriginResourcePolicy: false,
 }));
@@ -43,7 +41,7 @@ app.use(helmet({
 app.use('/api/books', booksRoutes);
 // All routes defined in usersRoutes will be accessible under the URL /api/users/
 app.use('/api/auth', userRoutes);  
-// Configure an access point for static files located in the images directory, to access them via the URL/images/example.jpg
+// Configuring an access point to manage requests to the 'image' directory, to access them via the URL/images/example.jpg
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;

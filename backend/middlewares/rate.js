@@ -1,6 +1,6 @@
 const rateLimit = require('express-rate-limit');
 
-// This middleware will limit the number of requests a client can send to the application, in a given period of time
+// This middleware will limit the number of requests a customer can send to the application (when they register or log in), within a given time frame
 module.exports = rateLimit({
     windowMs: 1 * 60 * 1000,
     max: 5,
