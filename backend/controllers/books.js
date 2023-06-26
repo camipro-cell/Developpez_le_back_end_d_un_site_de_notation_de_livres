@@ -14,8 +14,8 @@ exports.createBook = (req, res, next) => {
       averageRating: bookObject.ratings[0].grade
   });
   book.save()
-    .then(() => { res.status(201).json({message: 'Livre enregistré !'})})
-    .catch(error => { res.status(400).json( { error })})
+    .then(() => { res.status(201).json({message: 'Livre enregistré !'}) })
+    .catch(error => { res.status(400).json({ error }) })
 };
 
 // Update a book
@@ -64,15 +64,15 @@ exports.getOneBook = (req, res, next) => {
 
 // Delete a book
 exports.deleteBook = (req, res, next) => {
-  Book.findOne({ _id: req.params.id})
+  Book.findOne({ _id: req.params.id })
     .then(book => {
       if (book.userId != req.auth.userId) {
-        res.status(401).json({message: 'Not authorized'});
+        res.status(401).json({ message: 'Not authorized' });
       } else {
           const filename = book.imageUrl.split('/images/')[1];
           fs.unlink(`images/${filename}`, () => {
-            Book.deleteOne({_id: req.params.id})
-              .then(() => { res.status(200).json({message: 'Livre supprimé !'})})
+            Book.deleteOne({ _id: req.params.id })
+              .then(() => { res.status(200).json({ message: 'Livre supprimé !' })})
               .catch(error => res.status(401).json({ error }));
           });
         }
@@ -100,7 +100,7 @@ exports.postRating = (req, res, next) => {
   }
   
   // Check that the note is between 0 and 5
-  if ( rating < 0 || rating > 5) {
+  if (rating < 0 || rating > 5) {
     return res.status(400).json({ error: "La note doit être un nombre entre 0 et 5." });
   }
   
@@ -139,4 +139,3 @@ exports.postRating = (req, res, next) => {
       res.status(500).json({ error });
     });
 };
-

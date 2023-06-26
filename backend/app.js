@@ -4,7 +4,7 @@ const path = require('path');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 
-/// Load environment variables from a .env file
+// Load environment variables from a .env file
 require('dotenv').config();
 
 // Import the two routes files of the application
